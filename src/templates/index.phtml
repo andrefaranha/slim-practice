@@ -5,7 +5,23 @@
   <body>
     <h1>Confira as ofertas do dia.</h1>
     <p>
-      TODO Lista de Produtos
+      <table>
+
+        <tr>
+          <th>Nome</th>
+          <th>Descricao</th>
+          <th>Preco</th>
+        </tr>
+
+        <?php foreach($data['products'] as $product): ?>
+          <tr>
+            <th><a href="<?=$router->pathFor('product-detail', ['id' => $product->getId()])?>"><?=$product->getName() ?></a></th>
+            <th><?=$product->getDesc() ?></th>
+            <th><?=$product->getPrice() ?></th>
+          </tr>
+        <?php endforeach; ?>
+
+      </table>
     </p>
     <h2><a href="/users">Usuarios</a></h2>
     <h2><a href="/restaurants">Restaurantes</a></h2>

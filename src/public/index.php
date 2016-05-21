@@ -30,8 +30,10 @@ $container['db'] = function ($c) {
 };
 
 $app->get('/', function (Request $request, Response $response) {
+  $mapper = new ProductMapper($this->db);
+  $products = $mapper->getProducts();
 
-  return $this->view->render($response, "index.phtml");
+  return $this->view->render($response, "index.phtml", ["products" => $products, "router" => $this->router]);
 })->setName("home");
 
 $app->get('/users', function (Request $request, Response $response) {
