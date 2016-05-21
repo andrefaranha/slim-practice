@@ -1,5 +1,6 @@
 <?php $user = $data['user'] ?>
 <?php $restaurants = $data['restaurants'] ?>
+<h1><a href="/">Home</a></h1>
 <h1>Usuario <?php $user->getName() ?> </h1>
 
 <table>
@@ -25,15 +26,13 @@
 
 <table>
   <tr>
-    <th>Id</th>
     <th>Nome</th>
     <th>Descricao</th>
   </tr>
 
   <?php foreach($restaurants as $restaurant): ?>
     <tr>
-      <th><?=$restaurant->getId() ?></th>
-      <th><?=$restaurant->getName() ?></th>
+      <th><a href="<?=$router->pathFor('restaurant-detail', ['id' => $restaurant->getId()])?>"><?=$restaurant->getName() ?></a></th>
       <th><?=$restaurant->getDesc() ?></th>
     </tr>
   <?php endforeach; ?>

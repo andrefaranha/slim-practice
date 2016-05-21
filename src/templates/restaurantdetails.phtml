@@ -1,0 +1,39 @@
+<?php $restaurant = $data['restaurant'] ?>
+<?php $users = $data['users'] ?>
+<h1><a href="/">Home</a></h1>
+<h1>Restaurante <?php $restaurant->getName() ?> </h1>
+
+<table>
+
+  <tr>
+    <th>Id</th>
+    <th>Nome</th>
+    <th>Descricao</th>
+  </tr>
+
+  <tr>
+    <th><?=$restaurant->getId() ?></th>
+    <th><?=$restaurant->getName() ?></th>
+    <th><?=$restaurant->getDesc() ?></th>
+  </tr>
+</table>
+<p></p>
+  Usuarios
+
+<table>
+
+  <tr>
+    <th>Nome</th>
+    <th>Username</th>
+    <th>Email</th>
+    <th>Descricao</th>
+  </tr>
+
+  <?php foreach($users as $user): ?>
+    <tr>
+      <th><a href="<?=$router->pathFor('user-detail', ['username' => $user->getUsername()])?>"><?= $user->getName() ?></a></th>
+      <th><?=$user->getEmail() ?></th>
+      <th><?=$user->getDesc() ?></th>
+    </tr>
+  <?php endforeach; ?>
+</table>

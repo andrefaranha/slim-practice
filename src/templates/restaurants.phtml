@@ -3,15 +3,13 @@
 <table>
 
   <tr>
-    <th>Id</th>
     <th>Nome</th>
     <th>Descricao</th>
   </tr>
 
   <?php foreach($data['restaurants'] as $restaurant): ?>
     <tr>
-      <th><?=$restaurant->getId() ?></th>
-      <th><?=$restaurant->getName() ?></th>
+      <th><a href="<?=$router->pathFor('restaurant-detail', ['id' => $restaurant->getId()])?>"><?=$restaurant->getName() ?></a></th>
       <th><?=$restaurant->getDesc() ?></th>
     </tr>
   <?php endforeach; ?>

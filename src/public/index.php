@@ -32,13 +32,13 @@ $container['db'] = function ($c) {
 $app->get('/', function (Request $request, Response $response) {
 
   return $this->view->render($response, "index.phtml");
-});
+})->setName("home");
 
 $app->get('/users', function (Request $request, Response $response) {
   $mapper = new UserMapper($this->db);
   $users = $mapper->getUsers();
 
-  return $this->view->render($response, "users.phtml", ["users" => $users]);
+  return $this->view->render($response, "users.phtml", ["users" => $users, "router" => $this->router]);
 });
 
 $app->get('/user/{username}', function (Request $request, Response $response, $args) {
@@ -47,14 +47,23 @@ $app->get('/user/{username}', function (Request $request, Response $response, $a
   $user = $mapper->getUserByUsername($username);
   $restaurants = $mapper->getUserRestaurants($username);
 
-  return $this->view->render($response, "userdetail.phtml", ["user" => $user, "restaurants" => $restaurants]);
-});
+  return $this->view->render($response, "userdetail.phtml", ["user" => $user, "restaurants" => $restaurants, "router" => $this->router]);
+})->setName("user-detail");
 
 $app->get('/restaurants', function (Request $request, Response $response) {
   $mapper = new RestaurantMapper($this->db);
   $restaurants = $mapper->getRestaurants();
 
-  return $this->view->render($response, "restaurants.phtml", ["restaurants" => $restaurants]);
+  return $this->view->render($response, "restaurants.phtml", ["restaurants" => $restaurants, "router" => $this->router]);
 });
+
+$app->get('/restaurant/{id}', function (Request $request, Response $response, $args) {
+  $restaurent_id = (int) $args['id'];
+  $mapper = new RestaurantMapper($this->db);
+  $restaurant = $mapper->getRestaurantById($restaurent_id);
+  $users = $mapper->getRestaurantUsers($restaurent_id);
+
+  return $this->view->render($response, "restaurantdetails.phtml", ["restaurant" => $restaurant, "users" => $users, "router" => $this->router]);
+})->setName("restaurant-detail");
 
 $app->run();

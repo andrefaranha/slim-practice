@@ -26,6 +26,10 @@ class RestaurantUserSeeder extends AbstractSeed
         array(
           'username' => 'third',
           'restaurante_id' => 4,
+        ),
+        array(
+          'username' => 'abc',
+          'restaurante_id' => 3,
         )
       );
 
