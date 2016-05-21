@@ -1,0 +1,24 @@
+<?php $product = $data['product'] ?>
+<?php $restaurant = $data['restaurant'] ?>
+<h1><a href="/">Home</a></h1>
+<h1>Produto <?php $product->getName() ?> </h1>
+
+<table>
+
+  <tr>
+    <th>Id</th>
+    <th>Nome</th>
+    <th>Descricao</th>
+    <th>Preco</th>
+    <th>Restaurante</th>
+  </tr>
+
+  <tr>
+    <th><?=$product->getId() ?></th>
+    <th><?=$product->getName() ?></th>
+    <th><?=$product->getDesc() ?></th>
+    <th><?=$product->getPrice() ?></th>
+    <th><a href="<?=$router->pathFor('restaurant-detail', ['id' => $restaurant->getId()])?>"><?=$restaurant->getName() ?></a></th>
+  </tr>
+</table>
+<p></p>

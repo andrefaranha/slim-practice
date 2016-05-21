@@ -43,4 +43,19 @@ class RestaurantMapper extends Mapper {
     return $results;
   }
 
+  public function getRestaurantProducts($id) {
+    $sql = "SELECT p.id, p.nome, p.descricao, p.preco, p.restaurante_id
+      FROM produtos p
+      JOIN restaurantes r
+      ON (p.restaurante_id = r.id)
+      WHERE p.restaurante_id = :id;";
+    $stmt = $this->db->prepare($sql);
+    $result = $stmt->execute(["id" => $id]);
+    $results = [];
+    while ($row = $stmt->fetch()) {
+      $results[] = new Product($row);
+    }
+    return $results;
+  }
+
 } ?>

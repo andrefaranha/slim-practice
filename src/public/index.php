@@ -58,12 +58,29 @@ $app->get('/restaurants', function (Request $request, Response $response) {
 });
 
 $app->get('/restaurant/{id}', function (Request $request, Response $response, $args) {
-  $restaurent_id = (int) $args['id'];
+  $restaurant_id = (int) $args['id'];
   $mapper = new RestaurantMapper($this->db);
-  $restaurant = $mapper->getRestaurantById($restaurent_id);
-  $users = $mapper->getRestaurantUsers($restaurent_id);
+  $restaurant = $mapper->getRestaurantById($restaurant_id);
+  $users = $mapper->getRestaurantUsers($restaurant_id);
+  $products = $mapper->getRestaurantProducts($restaurant_id);
 
-  return $this->view->render($response, "restaurantdetails.phtml", ["restaurant" => $restaurant, "users" => $users, "router" => $this->router]);
+  return $this->view->render($response, "restaurantdetails.phtml", ["restaurant" => $restaurant, "users" => $users, "products" => $products, "router" => $this->router]);
 })->setName("restaurant-detail");
+
+$app->get('/products', function (Request $request, Response $response) {
+  $mapper = new ProductMapper($this->db);
+  $products = $mapper->getProducts();
+
+  return $this->view->render($response, "products.phtml", ["products" => $products, "router" => $this->router]);
+});
+
+$app->get('/product/{id}', function (Request $request, Response $response, $args) {
+  $product_id = (int) $args['id'];
+  $mapper = new ProductMapper($this->db);
+  $product = $mapper->getProductById($product_id);
+  $restaurant = $mapper->getProductRestaurant($product_id);
+
+  return $this->view->render($response, "productdetails.phtml", ["product" => $product, "restaurant" => $restaurant, "router" => $this->router]);
+})->setName("product-detail");
 
 $app->run();
