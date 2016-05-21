@@ -1,0 +1,41 @@
+<?php $user = $data['user'] ?>
+<?php $restaurants = $data['restaurants'] ?>
+<h1>Usuario <?php $user->getName() ?> </h1>
+
+<table>
+
+  <tr>
+    <th>Nome</th>
+    <th>Username</th>
+    <th>Password</th>
+    <th>Email</th>
+    <th>Descricao</th>
+  </tr>
+
+  <tr>
+    <th><?=$user->getName() ?></th>
+    <th><?=$user->getUsername() ?></th>
+    <th><?=$user->getPassword() ?></th>
+    <th><?=$user->getEmail() ?></th>
+    <th><?=$user->getDesc() ?></th>
+  </tr>
+</table>
+<p></p>
+  Restaurantes
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Nome</th>
+    <th>Descricao</th>
+  </tr>
+
+  <?php foreach($restaurants as $restaurant): ?>
+    <tr>
+      <th><?=$restaurant->getId() ?></th>
+      <th><?=$restaurant->getName() ?></th>
+      <th><?=$restaurant->getDesc() ?></th>
+    </tr>
+  <?php endforeach; ?>
+
+</table>

@@ -1,0 +1,19 @@
+<h1>Restaurantes do Sistema</h1>
+
+<table>
+
+  <tr>
+    <th>Id</th>
+    <th>Nome</th>
+    <th>Descricao</th>
+  </tr>
+
+  <?php foreach($data['restaurants'] as $restaurant): ?>
+    <tr>
+      <th><?=$restaurant->getId() ?></th>
+      <th><?=$restaurant->getName() ?></th>
+      <th><?=$restaurant->getDesc() ?></th>
+    </tr>
+  <?php endforeach; ?>
+
+</table>

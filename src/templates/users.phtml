@@ -1,0 +1,19 @@
+<h1>Usuarios do Sistema</h1>
+
+<table>
+
+  <tr>
+    <th>Nome</th>
+    <th>Username</th>
+    <th>Descricao</th>
+  </tr>
+
+  <?php foreach($data['users'] as $user): ?>
+    <tr>
+      <th><?=$user->getName() ?></th>
+      <th><?=$user->getUsername() ?></th>
+      <th><?=$user->getDesc() ?></th>
+    </tr>
+  <?php endforeach; ?>
+
+</table>
